@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>date testing</title>
+</head>
+<body>
+    <!--
+    A simple date widget - YYYY/MM/DD
+    -->
+    <!--
+    Script tags placed at the end of the body allow the markup to render faster because script tags are loaded synchronously
+    -->
+    <script src="javascript/datevalidation.js"></script>
+    <script>
+    (function(w){
+        'use strict';
+        //reference dateValidation object
+        var dv = w.ejr.dateValidation;
+        console.log('isDateValid returned', dv.isDateValid(2000, 2, 29));
+        console.log('isDateValid returned', dv.isDateValid(2012, 2, 29));
+        console.log('isDateValid returned', dv.isDateValid(2013, 2, 29));
+    }(window));
+    </script>
+</body>
+</html>
