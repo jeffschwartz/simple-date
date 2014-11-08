@@ -1,3 +1,4 @@
+/* Date Validation by Jeffrey Schwartz */
 (function(w){
     'use strict';
     var dv;
@@ -22,18 +23,13 @@
     };
     dv.isDayValid = function isDayValid(y, m, d){
         var daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-        //Validate numerics
-        if(typeof(d) !== 'number' || d < 1 || d > 31) return false;
-        //Validate for a possible 2/29 date
-        if(m === 2 && d > 28){
-            if(d !== 29) return false;
-            if(dv.isLeapYear(y)) return true;
-            return false;
-        }else{
+        //Validate numerics and min day range
+        if(typeof(d) !== 'number' || d < 1) return false;
+        //Validate for leap year (2/29)
+        if(m === 2 && d === 29) return dv.isLeapYear(y);
         //Validate for all other dates
         if(d <= daysInMonths[m - 1] ) return true;
         return false;
-        }
     };
     dv.isDateValid = function isDateValid(y, m, d){
         return (dv.isYearValid(y) && dv.isMonthValid(m) && dv.isDayValid(y, m, d));
