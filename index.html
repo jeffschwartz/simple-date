@@ -19,6 +19,8 @@
         console.log('isDateValid returned', dv.isDateValid(2000, 2, 29));
         console.log('isDateValid returned', dv.isDateValid(2012, 2, 29));
         console.log('isDateValid returned', dv.isDateValid(2013, 2, 29));
+        var n = new Date(2014, 10, 12);
+        console.log('isDateValid returned', dv.isDateValid(n.getFullYear(), n.getMonth(), n.getDay()));
     }(window));
     </script>
 </body>
