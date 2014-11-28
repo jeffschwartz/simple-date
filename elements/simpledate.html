@@ -4,27 +4,37 @@
 -->
 <link rel="import" href="..\bower_components/polymer/polymer.html">
 
-<polymer-element name="simpledate-element" attributes="fontsize year month day" noscript>
+<polymer-element name="simpledate-element" attributes="fontsize datecolor labelcolor yearcolor monthcolor daycolor separatorcolor year month day" noscript>
     <template>
         <style media="screen">
             input[type="text"] {
                 text-align: right;
-                font-size: {{fontsize}}
+                font-size: {{fontsize}};
             }
             .pseudolabel {
-                font-size: {{fontsize}}
+                font-size: {{fontsize}};
+                color: {{labelcolor || datecolor}};
             }
             .separator {
-                font-size: {{fontsize}}
+                font-size: {{fontsize}};
+                color: {{separatorcolor}};
             }
             #date {
                 width: 100%;
+                color: {{datecolor}};
             }
             #date-element-year {
                 width: 2.7em;
+                color: {{yearcolor || datecolor}};
             }
-           #date-element-month, #date-element-day {
+            #date-element-month, #date-element-day {
                 width: 1.7em;
+            }
+            #date-element-month {
+                color: {{monthcolor || datecolor}};
+            }
+            #date-element-day {
+                color: {{daycolor || datecolor}};
             }
         </style>
         <div id="date">
