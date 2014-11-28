@@ -2,9 +2,11 @@
     Todo:
     1) Add a getter named 'isValid' and set it to boolean whenever the date is changed.
 -->
-<link rel="import" href="..\bower_components/polymer/polymer.html">
 
-<polymer-element name="simpledate-element" attributes="fontsize datecolor labelcolor yearcolor monthcolor daycolor separatorcolor year month day">
+<link rel="import" href="..\bower_components/polymer/polymer.html">
+<script src="../javascript/datevalidation.js"></script>
+
+<polymer-element name="simpledate-element" attributes="fontsize datecolor labelcolor yearcolor monthcolor daycolor separatorcolor year month day" noscript>
     <template>
         <style media="screen">
             input[type="text"] {
