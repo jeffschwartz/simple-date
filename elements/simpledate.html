@@ -1,0 +1,29 @@
+<link rel="import" href="..\bower_components/polymer/polymer.html">
+
+<polymer-element name="date-element" noscript>
+    <template>
+        <style media="screen">
+            #date {
+                width: 100%;
+            }
+            #date-element-year {
+                width: 2.7em;
+            }
+           #date-element-month, #date-element-day {
+                width: 1.7em;
+            }
+        </style>
+        <div id="date">
+            <span>Date: </span>
+            <span>
+                <input id="date-element-year" type="text" name="txtYear" value="{{year}}" placeholder="yyyy" autofocus> <strong>/</strong>
+            </span>
+            <span>
+                <input id="date-element-month" type="text" name="txtMonth" value="{{month}}" placeholder="mm"> <strong>/</strong>
+            </span>
+            <span>
+                <input id="date-element-day" type="text" name="txtDay" value="{{day}}" placeholder="dd">
+            </span>
+        </div>
+    </template>
+</polymer-element>
