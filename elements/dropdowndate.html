@@ -1,0 +1,34 @@
+<link rel="import" href="..\bower_components/polymer/polymer.html">
+
+<polymer-element name="date-element" noscript>
+    <template>
+    <style media="screen">
+    #date {
+        width: 100%;
+    }
+    #date-element-year {
+        width: 2.7em;
+    }
+    #date-element-month, #date-element-day {
+        width: 1.7em;
+    }
+    </style>
+    <div id="date">
+        <span>Date: </span>
+        <span>
+            <select id="date-element-year" name="ddYear" autofocus>
+            </select>
+            <strong>/</strong>
+        </span>
+        <span>
+            <select id="date-element-month" name="ddMonth">
+            </select>
+            <strong>/</strong>
+        </span>
+        <span>
+            <select id="date-element-day" name="ddDay">
+            </select>
+        </span>
+    </div>
+</template>
+</polymer-element>
