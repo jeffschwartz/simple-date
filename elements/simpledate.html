@@ -6,7 +6,7 @@
 <link rel="import" href="..\bower_components/polymer/polymer.html">
 <script src="../javascript/datevalidation.js"></script>
 
-<polymer-element name="simpledate-element" attributes="fontsize datecolor labelcolor yearcolor monthcolor daycolor separatorcolor year month day" noscript>
+<polymer-element name="simpledate-element" attributes="fontsize datecolor labelcolor yearcolor monthcolor daycolor separatorcolor year month day">
     <template>
         <style media="screen">
             input[type="text"] {
@@ -53,13 +53,26 @@
                 <input id="date-element-day" type="text" name="txtDay" value="{{day}}" placeholder="dd" maxlength="2">
             </span>
         </div>
-        <script>
-        (function(){
-            "use strict";
-            Polymer({
-
-            });
-        }());
-        </script>
     </template>
+        <script>
+        (function(w){
+            "use strict";
+            var dv = w.ejr.dateValidation;
+            Polymer({
+                year: "",
+                month: "",
+                day: "",
+                isValid: false,
+                observe: {
+                    year: "isDateValid",
+                    month: "isDateValid",
+                    day: "isDateValid"
+                },
+                isDateValid: function() {
+                     this.isValid = dv.isDateValid(parseInt(this.year, 10), parseInt(this.month, 10), parseInt(this.day, 10));
+                     console.log("isDateValid =", this.isValid);
+                }
+            });
+        }(window));
+        </script>
 </polymer-element>
