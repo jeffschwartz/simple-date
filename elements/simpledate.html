@@ -68,9 +68,22 @@
                     month: "isDateValid",
                     day: "isDateValid"
                 },
+                // Returns true if date is valid, otherwise returns false.
                 isDateValid: function() {
                      this.isValid = dv.isDateValid(parseInt(this.year, 10), parseInt(this.month, 10), parseInt(this.day, 10));
                      console.log("isDateValid =", this.isValid);
+                     if(this.isValid){
+                         console.log("new Date =", this.getDate());
+                         console.log("date as string =", this.getDateAsString());
+                     }
+                },
+                // Create and returns a Date object if the date is valid, otherwise returns undefined.
+                getDate: function() {
+                    return this.isValid && new Date(parseInt(this.year), parseInt(this.month - 1), parseInt(this.day)) || void(0);
+                },
+                // Returns a Date as a string if the date is valid, otherwise returns undefined.
+                getDateAsString: function() {
+                    return this.isValid && Date(parseInt(this.year), parseInt(this.month - 1), parseInt(this.day)) || void(0);
                 }
             });
         }(window));
