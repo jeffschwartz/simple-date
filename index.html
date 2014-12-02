@@ -19,6 +19,10 @@
     (function(){
         "use strict";
         var elemSimpleDate = document.getElementById("sd");
+        /*
+           Interfacing with custom elements is no different
+           than interfacing with built-in html elements.
+         */
         elemSimpleDate.addEventListener("datechanged", function(e){
             var elemDateInfo = document.getElementById("dateinfo"),
                 str = "Date (id=\"" + elemSimpleDate.id + "\") ";
