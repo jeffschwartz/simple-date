@@ -6,7 +6,7 @@
 <link rel="import" href="..\bower_components/polymer/polymer.html">
 <script src="../javascript/datevalidation.js"></script>
 
-<polymer-element name="simpledate-element" attributes="fontsize datecolor labelcolor yearcolor monthcolor daycolor separatorcolor year month day">
+<polymer-element name="simpledate-element" attributes="fontsize datecolor labeltext labelcolor yearcolor monthcolor daycolor separatorcolor year month day">
     <template>
         <style media="screen">
             input[type="text"] {
@@ -45,7 +45,7 @@
             }
         </style>
         <div id="date">
-            <span class="pseudolabel">Date: </span>
+            <span class="pseudolabel">{{labeltext}}: </span>
             <span>
                 <input id="date-element-year" type="text" name="txtYear" value="{{year}}" placeholder="yyyy" maxlength="4" autofocus>
                 <strong class="separator">/</strong>
@@ -63,6 +63,15 @@
     <script>
     (function(w){
         "use strict";
+        // Filter for a finite positive integer.
+        function filterInteger (value) {
+            if(/([0-9])$/.test(value)) { return Number(value); }
+            return NaN;
+        }
+        // Shorty for parseInt(num, 10).
+        function myParseInt(val){
+            return parseInt(val, 10);
+        }
         var dv = w.ejr.dateValidation;
         Polymer("simpledate-element", {
             year: "",
@@ -77,7 +86,7 @@
             // Returns true if date is valid, otherwise returns false.
             // Fires a custom event 'datechanged'.
             isDateValid: function() {
-                 this.isValid = dv.isDateValid(parseInt(this.year, 10), parseInt(this.month, 10), parseInt(this.day, 10));
+                 this.isValid = dv.isDateValid(filterInteger(this.year), filterInteger(this.month), filterInteger(this.day));
                  console.log("isDateValid =", this.isValid);
                  if(this.isValid){
                      console.log("new Date =", this.getDate());
@@ -88,12 +97,11 @@
             },
             // Create and returns a Date object if the date is valid, otherwise returns undefined.
             getDate: function() {
-                return this.isValid && new Date(parseInt(this.year), parseInt(this.month - 1), parseInt(this.day)) || void(0);
+                return this.isValid && new Date(myParseInt(this.year), myParseInt(this.month - 1), myParseInt(this.day)) || void(0);
             },
             // Returns a Date as a string if the date is valid, otherwise returns undefined.
             getDateAsString: function() {
-                // return this.isValid && Date(parseInt(this.year), parseInt(this.month - 1), parseInt(this.day)) || void(0);
-                return this.isValid && new Date(parseInt(this.year), parseInt(this.month - 1).toString(), parseInt(this.day)) || void(0);
+                return this.isValid && new Date(myParseInt(this.year), myParseInt(this.month - 1).toString(), myParseInt(this.day)) || void(0);
             }
         });
     }(window));
