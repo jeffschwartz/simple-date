@@ -12,28 +12,23 @@
     <!--
     A simple date widget - YYYY/MM/DD
     -->
-    <simpledate-element fontsize="3em" datecolor="#f00" year="2014" month="11" day="28"></simpledate-element>
-    <!--
-    A dropdown-based date widget
-    -->
-    <!-- <dropdowndate-element></simpledate-element> -->
-    <!--
-    Script tags placed at the end of the body allow the markup to render faster because script tags are loaded synchronously
-    -->
-    <!--
-    <script src="javascript/datevalidation.js"></script>
+    <simpledate-element id="sd" fontsize="3em" datecolor="#000" separatorcolor="#00f" yearcolor="#f00" year="2014" monthcolor="#f00"  month="11" daycolor="#f00" day="28">
+
+    </simpledate-element>
+
+    <div id="dateinfo"></div>
+
     <script>
-    (function(w){
-        'use strict';
-        //reference dateValidation object
-        var dv = w.ejr.dateValidation;
-        console.log('isDateValid returned', dv.isDateValid(2000, 2, 29));
-        console.log('isDateValid returned', dv.isDateValid(2012, 2, 29));
-        console.log('isDateValid returned', dv.isDateValid(2013, 2, 29));
-        var n = new Date(2014, 10, 12);
-        console.log('isDateValid returned', dv.isDateValid(n.getFullYear(), n.getMonth(), n.getDay()));
-    }(window));
+    (function(){
+        "use strict";
+        var elemSimpleDate = document.getElementById("sd");
+        elemSimpleDate.addEventListener("datechanged", function(e){
+            var elemDateInfo = document.getElementById("dateinfo"),
+                str = "Date (id=\"" + elemSimpleDate.id + "\") ";
+            str += e.detail.isValid ? "is valid." : "is not valid.";
+            elemDateInfo.textContent = str;
+        });
+    }());
     </script>
-    -->
 </body>
 </html>

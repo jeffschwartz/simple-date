@@ -7,10 +7,10 @@
     //define this module's name space
     dv = w.ejr.dateValidation = {};
     dv.isYearValid = function isYearValid(y){
-        return typeof(y) === 'number';
+        return !isNaN(y) && typeof(y) === 'number';
     };
     dv.isMonthValid = function isMonthValid(m){
-        if(typeof(m) !== 'number') { return false; }
+        if(isNaN(m) || typeof(m) !== 'number') { return false; }
         return m >= 1 && m <= 12;
     };
     dv.isLeapYear = function isYearALeapYear(y){
@@ -24,7 +24,7 @@
     dv.isDayValid = function isDayValid(y, m, d){
         var daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
         //Validate numerics and min day range
-        if(typeof(d) !== 'number' || d < 1) { return false; }
+        if(isNaN(d) || typeof(d) !== 'number' || d < 1) { return false; }
         //Validate for leap year (2/29)
         if(m === 2 && d === 29) { return dv.isLeapYear(y); }
         //Validate for all other dates
