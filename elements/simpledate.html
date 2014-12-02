@@ -3,7 +3,7 @@
     1) Add a getter named 'isValid' and set it to boolean whenever the date is changed.
 -->
 
-<link rel="import" href="..\bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <script src="../javascript/datevalidation.js"></script>
 
 <polymer-element name="simpledate-element" attributes="fontsize datecolor labeltext labelcolor yearcolor monthcolor daycolor separatorcolor year month day">
@@ -72,6 +72,10 @@
         function myParseInt(val){
             return parseInt(val, 10);
         }
+        function mylog(){
+            // ** Important ** when using apply with console.log(), console must be passed as the context.
+            console.log.apply(console, arguments);
+        }
         var dv = w.ejr.dateValidation;
         Polymer("simpledate-element", {
             year: "",
@@ -87,10 +91,10 @@
             // Fires a custom event 'datechanged'.
             isDateValid: function() {
                  this.isValid = dv.isDateValid(filterInteger(this.year), filterInteger(this.month), filterInteger(this.day));
-                 console.log("isDateValid =", this.isValid);
+                 mylog("isDateValid =", this.isValid);
                  if(this.isValid){
-                     console.log("new Date =", this.getDate());
-                     console.log("date as string =", this.getDateAsString());
+                     mylog("new Date =", this.getDate());
+                     mylog("date as string =", this.getDateAsString());
                  }
                  // Polymer convenience method for node.dispatchEvent().
                  this.fire("datechanged", {isValid: this.isValid});
