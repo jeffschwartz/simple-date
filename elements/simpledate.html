@@ -8,7 +8,7 @@
 
 <polymer-element name="simpledate-element" attributes="fontsize datecolor labeltext labelcolor yearcolor monthcolor daycolor separatorcolor year month day">
     <template>
-        <style>
+        <style no-shim>
             input[type="text"] {
                 text-align: center;
                 font-size: {{fontsize}};
@@ -58,7 +58,6 @@
                 <input id="date-element-day" type="text" name="txtDay" value="{{day}}" placeholder="dd" maxlength="2">
             </span>
         </div>
-        <content></content>
     </template>
     <script>
     (function(w){
