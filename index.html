@@ -2,24 +2,48 @@
 <html>
 <head>
     <title>date testing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <!-- 1. Load platform support before any code that touches the DOM. -->
+    <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <!-- 2. Load the component using an HTML Import -->
+    <link rel="import" href="./elements/simpledate.html">
+    <!-- <link rel="import" href="elements/dropdowndate.html"> -->
+    <style>
+        #dateinfo {
+            margin-top: 20px;
+            padding: 1rem;
+            border: solid 2px #ccc;
+            font-size: 1.3rem;
+            text-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </head>
-<body>
+<body unresolved>
     <!--
-    A simple date widget - YYYY/MM/DD
+    A custom date element.
     -->
+    <simple-date id="sd" fontsize="3em" labeltext="Date" datecolor="#000" separatorcolor="#aaa" yearcolor="#00f"
+        year="2014" monthcolor="#00f"  month="11" daycolor="#00f" day="28"></simple-date>
     <!--
-    Script tags placed at the end of the body allow the markup to render faster because script tags are loaded synchronously
+    A container to display the output of the custom date element.
     -->
-    <script src="javascript/datevalidation.js"></script>
+    <div id="dateinfo"></div>
     <script>
-    (function(w){
-        'use strict';
-        //reference dateValidation object
-        var dv = w.ejr.dateValidation;
-        console.log('isDateValid returned', dv.isDateValid(2000, 2, 29));
-        console.log('isDateValid returned', dv.isDateValid(2012, 2, 29));
-        console.log('isDateValid returned', dv.isDateValid(2013, 2, 29));
-    }(window));
+    (function(){
+        "use strict";
+        var elemSimpleDate = document.getElementById("sd");
+        /*
+           Interfacing with custom elements is no different
+           than interfacing with built-in html elements.
+         */
+        elemSimpleDate.addEventListener("datechanged", function(e){
+            var elemDateInfo = document.getElementById("dateinfo"),
+                str = "Date (id=\"" + elemSimpleDate.id + "\") ";
+            str += e.detail.isValid ? "is valid." : "is not valid.";
+            elemDateInfo.textContent = str;
+        });
+    }());
     </script>
 </body>
 </html>

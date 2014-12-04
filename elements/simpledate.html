@@ -1,0 +1,108 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<script src="../javascript/datevalidation.js"></script>
+
+<polymer-element name="simple-date" attributes="fontsize datecolor labeltext labelcolor yearcolor monthcolor daycolor separatorcolor year month day">
+    <template>
+        <style no-shim>
+            input[type="text"] {
+                text-align: center;
+                font-size: {{fontsize}};
+                border: none;
+            }
+            .pseudolabel {
+                font-size: {{fontsize}};
+                color: {{labelcolor || datecolor}};
+                text-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
+            }
+            .separator {
+                font-size: {{fontsize}};
+                color: {{separatorcolor}};
+                text-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
+            }
+            #date {
+                width: 100%;
+                color: {{datecolor}};
+            }
+            #date-element-year {
+                width: 2.7em;
+                color: {{yearcolor || datecolor}};
+                text-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
+            }
+            #date-element-month, #date-element-day {
+                width: 1.7em;
+            }
+            #date-element-month {
+                color: {{monthcolor || datecolor}};
+                text-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
+            }
+            #date-element-day {
+                color: {{daycolor || datecolor}};
+                text-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
+            }
+        </style>
+        <div id="date">
+            <span class="pseudolabel">{{labeltext || "Date"}}: </span>
+            <span>
+                <input id="date-element-year" type="text" name="txtYear" value="{{year}}" placeholder="yyyy" maxlength="4" autofocus>
+                <strong class="separator">/</strong>
+            </span>
+            <span>
+                <input id="date-element-month" type="text" name="txtMonth" value="{{month}}" placeholder="mm" maxlength="2">
+                <strong class="separator">/</strong>
+            </span>
+            <span>
+                <input id="date-element-day" type="text" name="txtDay" value="{{day}}" placeholder="dd" maxlength="2">
+            </span>
+        </div>
+    </template>
+    <script>
+    (function(w){
+        "use strict";
+        // Filter for a finite positive integer.
+        function filterInteger (value) {
+            if(/([0-9])$/.test(value)) { return Number(value); }
+            return NaN;
+        }
+        // Shorty for parseInt(num, 10).
+        function myParseInt(val){
+            return parseInt(val, 10);
+        }
+        function mylog(){
+            // ** Important ** when using apply with console.log(), console must be passed as the context.
+            console.log.apply(console, arguments);
+        }
+        var dv = w.ejr.dateValidation;
+        Polymer("simple-date", {
+            year: "",
+            month: "",
+            day: "",
+            isValid: false,
+            observe: {
+                year: "isDateValid",
+                month: "isDateValid",
+                day: "isDateValid"
+            },
+            // Returns true if date is valid, otherwise returns false.
+            // Fires a custom event 'datechanged'.
+            isDateValid: function() {
+                 this.isValid = dv.isDateValid(filterInteger(this.year), filterInteger(this.month), filterInteger(this.day));
+                 mylog("isDateValid =", this.isValid);
+                 if(this.isValid){
+                     mylog("new Date =", this.getDate());
+                     mylog("date as string =", this.getDateAsString());
+                 }
+                 // Polymer convenience method for node.dispatchEvent().
+                 this.fire("datechanged", {isValid: this.isValid});
+            },
+            // Create and returns a Date object if the date is valid, otherwise returns undefined.
+            getDate: function() {
+                return this.isValid && new Date(myParseInt(this.year), myParseInt(this.month - 1), myParseInt(this.day)) || void(0);
+            },
+            // Returns a Date as a string if the date is valid, otherwise returns undefined.
+            getDateAsString: function() {
+                return this.isValid && new Date(myParseInt(this.year), myParseInt(this.month - 1).toString(), myParseInt(this.day)) || void(0);
+            }
+        });
+    }(window));
+    </script>
+</polymer-element>
