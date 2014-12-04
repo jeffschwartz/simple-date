@@ -1,7 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <script src="../javascript/datevalidation.js"></script>
 
-<polymer-element name="simpledate-element" attributes="fontsize datecolor labeltext labelcolor yearcolor monthcolor daycolor separatorcolor year month day">
+<polymer-element name="simple-date" attributes="fontsize datecolor labeltext labelcolor yearcolor monthcolor daycolor separatorcolor year month day">
     <template>
         <style no-shim>
             input[type="text"] {
@@ -72,7 +72,7 @@
             console.log.apply(console, arguments);
         }
         var dv = w.ejr.dateValidation;
-        Polymer("simpledate-element", {
+        Polymer("simple-date", {
             year: "",
             month: "",
             day: "",
