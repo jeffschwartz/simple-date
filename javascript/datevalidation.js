@@ -1,4 +1,4 @@
-/* Date Validation by Jeffrey Schwartz */
+/* By Jeffrey Schwartz - Licensed under MIT */
 (function(w){
     'use strict';
     var dv;
