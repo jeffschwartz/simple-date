@@ -32,6 +32,6 @@
         return false;
     };
     dv.isDateValid = function isDateValid(y, m, d){
-        { return (dv.isYearValid(y) && dv.isMonthValid(m) && dv.isDayValid(y, m, d)); }
+        return (dv.isYearValid(y) && dv.isMonthValid(m) && dv.isDayValid(y, m, d));
     };
 }(window));
